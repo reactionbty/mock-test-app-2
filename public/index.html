@@ -311,173 +311,194 @@
     .scorecard-screen {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
       min-height: 100vh;
-      padding: 24px;
+      padding: 20px;
+      padding-bottom: 40px;
     }
 
-    .scorecard-content {
-      width: 100%;
-      max-width: 360px;
+    .scorecard-header {
+      text-align: center;
+      padding: 32px 0 24px;
     }
 
-    .trophy-icon {
+    .scorecard-icon {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 16px;
+      border-radius: var(--radius-sm);
+      background: var(--primary-dim);
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 80px;
-      height: 80px;
-      margin: 0 auto 24px;
-      border-radius: 50%;
-      background: var(--primary-dim);
     }
 
-    .trophy-icon svg {
-      width: 40px;
-      height: 40px;
+    .scorecard-icon svg {
+      width: 32px;
+      height: 32px;
       color: var(--primary);
     }
 
     .scorecard-title {
-      text-align: center;
       font-size: 24px;
       font-weight: 700;
+      letter-spacing: -0.5px;
       color: var(--text-primary);
-      margin-bottom: 8px;
+      margin-bottom: 4px;
     }
 
     .scorecard-grade {
-      text-align: center;
-      font-size: 18px;
+      font-size: 15px;
       font-weight: 600;
-      margin-bottom: 32px;
     }
 
-    .score-circle {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 128px;
-      height: 128px;
-      margin: 0 auto 32px;
-      border-radius: 50%;
-      border: 4px solid var(--primary-dim);
+    /* Score Card */
+    .score-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 16px;
     }
 
-    .score-circle span {
-      font-size: 36px;
-      font-weight: 700;
-      color: var(--text-primary);
-    }
-
-    .scorecard-stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-bottom: 32px;
-    }
-
-    .scorecard-stat {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 16px;
-      border-radius: 12px;
-      background: var(--card);
-    }
-
-    .scorecard-stat.correct {
-      background: rgba(34, 197, 94, 0.15);
-    }
-
-    .scorecard-stat.wrong {
-      background: rgba(239, 68, 68, 0.15);
-    }
-
-    .scorecard-stat.skipped {
-      background: var(--surface);
-    }
-
-    .scorecard-stat-icon {
-      width: 24px;
-      height: 24px;
-      margin-bottom: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .scorecard-stat-icon.correct {
-      color: var(--success);
-    }
-
-    .scorecard-stat-icon.wrong {
-      color: var(--error);
-    }
-
-    .scorecard-stat-icon.skipped {
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      border: 2px solid var(--text-muted);
-      font-size: 12px;
-      color: var(--text-muted);
-    }
-
-    .scorecard-stat-value {
-      font-size: 24px;
-      font-weight: 700;
-    }
-
-    .scorecard-stat-value.correct {
-      color: var(--success);
-    }
-
-    .scorecard-stat-value.wrong {
-      color: var(--error);
-    }
-
-    .scorecard-stat-value.skipped {
-      color: var(--text-muted);
-    }
-
-    .scorecard-stat-label {
-      font-size: 12px;
-      color: var(--text-muted);
-    }
-
-    .scorecard-summary {
-      background: var(--surface);
-      border-radius: 12px;
-      padding: 16px;
+    .score-main {
+      text-align: center;
       margin-bottom: 24px;
     }
 
-    .scorecard-summary-row {
+    .score-percent {
+      font-size: 56px;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: -2px;
+      line-height: 1;
+    }
+
+    .score-label {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .score-progress {
+      height: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: 16px;
+    }
+
+    .score-progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), #60a5fa);
+      border-radius: 10px;
+      transition: width 0.5s ease;
+    }
+
+    .score-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 20px 0;
+    }
+
+    .score-breakdown {
+      display: flex;
+      justify-content: space-around;
+    }
+
+    .score-breakdown-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .score-breakdown-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .score-breakdown-icon.correct {
+      background: var(--success-bg);
+      color: var(--success);
+    }
+
+    .score-breakdown-icon.wrong {
+      background: var(--error-bg);
+      color: var(--error);
+    }
+
+    .score-breakdown-icon.skipped {
+      background: rgba(100, 116, 139, 0.2);
+      color: var(--text-muted);
+    }
+
+    .score-breakdown-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .score-breakdown-value {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.2;
+    }
+
+    .score-breakdown-label {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* Summary Card */
+    .summary-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      margin-bottom: 24px;
+    }
+
+    .summary-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
       font-size: 14px;
     }
 
-    .scorecard-summary-row + .scorecard-summary-row {
-      margin-top: 8px;
+    .summary-row + .summary-row {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
     }
 
-    .scorecard-summary-label {
+    .summary-label {
       color: var(--text-muted);
     }
 
-    .scorecard-summary-value {
+    .summary-value {
       font-weight: 600;
       color: var(--text-primary);
     }
 
+    /* Action Buttons */
     .scorecard-buttons {
       display: flex;
       flex-direction: column;
       gap: 12px;
+      margin-top: auto;
+    }
+
+    .scorecard-buttons .btn-secondary,
+    .scorecard-buttons .btn-primary {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
     }
 
     .question-number {
@@ -913,8 +934,9 @@
 
   <!-- SCORECARD SCREEN -->
   <div id="scorecardScreen" class="screen scorecard-screen" style="display:none;">
-    <div class="scorecard-content">
-      <div class="trophy-icon">
+    <!-- Header -->
+    <div class="scorecard-header">
+      <div class="scorecard-icon">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
           <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
@@ -926,59 +948,75 @@
       </div>
       <h1 class="scorecard-title">Test Complete!</h1>
       <p id="scorecardGrade" class="scorecard-grade"></p>
+    </div>
 
-      <div class="score-circle">
-        <span id="scorecardPercent">0%</span>
-      </div>
-
-      <div class="scorecard-stats">
-        <div class="scorecard-stat correct">
-          <div class="scorecard-stat-icon correct">&#10003;</div>
-          <span id="scorecardCorrect" class="scorecard-stat-value correct">0</span>
-          <span class="scorecard-stat-label">Correct</span>
-        </div>
-        <div class="scorecard-stat wrong">
-          <div class="scorecard-stat-icon wrong">&#10005;</div>
-          <span id="scorecardWrong" class="scorecard-stat-value wrong">0</span>
-          <span class="scorecard-stat-label">Wrong</span>
-        </div>
-        <div class="scorecard-stat skipped">
-          <div class="scorecard-stat-icon skipped">?</div>
-          <span id="scorecardSkipped" class="scorecard-stat-value skipped">0</span>
-          <span class="scorecard-stat-label">Skipped</span>
+    <!-- Score Card -->
+    <div class="score-card">
+      <div class="score-main">
+        <div id="scorecardPercent" class="score-percent">0%</div>
+        <div class="score-label">Your Score</div>
+        <div class="score-progress">
+          <div id="scorecardProgressBar" class="score-progress-bar" style="width: 0%"></div>
         </div>
       </div>
 
-      <div class="scorecard-summary">
-        <div class="scorecard-summary-row">
-          <span class="scorecard-summary-label">Total Questions</span>
-          <span id="scorecardTotal" class="scorecard-summary-value">0</span>
-        </div>
-        <div class="scorecard-summary-row">
-          <span class="scorecard-summary-label">Your Score</span>
-          <span id="scorecardScore" class="scorecard-summary-value">0 / 0</span>
-        </div>
-      </div>
+      <div class="score-divider"></div>
 
-      <div class="scorecard-buttons">
-        <button class="btn-secondary" onclick="retryTest()">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px;">
-            <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path>
-            <path d="M21 3v5h-5"></path>
-            <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path>
-            <path d="M8 16H3v5"></path>
-          </svg>
-          Retry Test
-        </button>
-        <button class="btn-primary" onclick="exitScorecard()">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px;">
-            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-            <polyline points="16 17 21 12 16 7"></polyline>
-            <line x1="21" y1="12" x2="9" y2="12"></line>
-          </svg>
-          Exit to Sections
-        </button>
+      <div class="score-breakdown">
+        <div class="score-breakdown-item">
+          <div class="score-breakdown-icon correct">&#10003;</div>
+          <div class="score-breakdown-text">
+            <span id="scorecardCorrect" class="score-breakdown-value">0</span>
+            <span class="score-breakdown-label">Correct</span>
+          </div>
+        </div>
+        <div class="score-breakdown-item">
+          <div class="score-breakdown-icon wrong">&#10005;</div>
+          <div class="score-breakdown-text">
+            <span id="scorecardWrong" class="score-breakdown-value">0</span>
+            <span class="score-breakdown-label">Wrong</span>
+          </div>
+        </div>
+        <div class="score-breakdown-item">
+          <div class="score-breakdown-icon skipped">?</div>
+          <div class="score-breakdown-text">
+            <span id="scorecardSkipped" class="score-breakdown-value">0</span>
+            <span class="score-breakdown-label">Skipped</span>
+          </div>
+        </div>
       </div>
+    </div>
+
+    <!-- Summary Card -->
+    <div class="summary-card">
+      <div class="summary-row">
+        <span class="summary-label">Total Questions</span>
+        <span id="scorecardTotal" class="summary-value">0</span>
+      </div>
+      <div class="summary-row">
+        <span class="summary-label">Answered</span>
+        <span id="scorecardAnswered" class="summary-value">0 / 0</span>
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="scorecard-buttons">
+      <button class="btn-secondary" onclick="retryTest()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path>
+          <path d="M21 3v5h-5"></path>
+          <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path>
+          <path d="M8 16H3v5"></path>
+        </svg>
+        Retry Test
+      </button>
+      <button class="btn-primary" onclick="exitScorecard()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 12h18"></path>
+          <path d="m12 5 7 7-7 7"></path>
+        </svg>
+        Back to Sections
+      </button>
     </div>
   </div>
 
@@ -1302,11 +1340,12 @@
     document.getElementById("scorecardPercent").innerText = percent + "%";
     document.getElementById("scorecardGrade").innerText = grade;
     document.getElementById("scorecardGrade").style.color = gradeColor;
+    document.getElementById("scorecardProgressBar").style.width = percent + "%";
     document.getElementById("scorecardCorrect").innerText = correctVal;
     document.getElementById("scorecardWrong").innerText = wrongVal;
     document.getElementById("scorecardSkipped").innerText = skipped;
     document.getElementById("scorecardTotal").innerText = total;
-    document.getElementById("scorecardScore").innerText = correctVal + " / " + total;
+    document.getElementById("scorecardAnswered").innerText = (correctVal + wrongVal) + " / " + total;
     
     testScreen.style.display = "none";
     document.getElementById("scorecardScreen").style.display = "flex";

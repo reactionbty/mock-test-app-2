@@ -2,7 +2,8 @@
 
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
-import { CheckCircle2, XCircle, Trophy, LogOut, RotateCcw } from "lucide-react"
+import { Progress } from "@/components/ui/progress"
+import { CheckCircle2, XCircle, Trophy, RotateCcw, ArrowRight } from "lucide-react"
 
 interface ScorecardProps {
   totalQuestions: number
@@ -20,7 +21,8 @@ export function Scorecard({
   onRetry,
 }: ScorecardProps) {
   const percentage = Math.round((correctCount / totalQuestions) * 100)
-  const unanswered = totalQuestions - correctCount - wrongCount
+  const skipped = totalQuestions - correctCount - wrongCount
+  const answered = correctCount + wrongCount
 
   function getGrade() {
     if (percentage >= 90) return { label: "Excellent!", color: "text-success" }
@@ -32,88 +34,97 @@ export function Scorecard({
   const grade = getGrade()
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center p-6">
-      <div className="w-full max-w-sm">
-        {/* Trophy Icon */}
-        <div className="mb-6 flex justify-center">
-          <div className="flex h-20 w-20 items-center justify-center rounded-full bg-primary/15">
-            <Trophy className="h-10 w-10 text-primary" />
-          </div>
+    <div className="flex min-h-screen flex-col p-5 pb-10">
+      {/* Header */}
+      <div className="py-8 text-center">
+        <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-xl bg-primary/15">
+          <Trophy className="h-8 w-8 text-primary" />
         </div>
-
-        {/* Title */}
-        <h1 className="mb-2 text-center text-2xl font-bold text-foreground">
+        <h1 className="mb-1 text-2xl font-bold tracking-tight text-foreground">
           Test Complete!
         </h1>
-        <p className={`mb-8 text-center text-lg font-medium ${grade.color}`}>
+        <p className={`text-sm font-semibold ${grade.color}`}>
           {grade.label}
         </p>
+      </div>
 
-        {/* Score Circle */}
-        <div className="mb-8 flex justify-center">
-          <div className="relative flex h-32 w-32 items-center justify-center rounded-full border-4 border-primary/30">
-            <div className="text-center">
-              <span className="text-4xl font-bold text-foreground">{percentage}%</span>
+      {/* Score Card */}
+      <Card className="mb-4 border-border bg-card p-6">
+        <div className="mb-6 text-center">
+          <div className="text-6xl font-bold tracking-tight text-primary">
+            {percentage}%
+          </div>
+          <div className="mt-1 text-sm text-muted-foreground">Your Score</div>
+          <Progress value={percentage} className="mt-4 h-2" />
+        </div>
+
+        <div className="my-5 h-px bg-border" />
+
+        <div className="flex justify-around">
+          <div className="flex items-center gap-2.5">
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-success/20">
+              <CheckCircle2 className="h-4 w-4 text-success" />
+            </div>
+            <div className="flex flex-col">
+              <span className="text-lg font-bold text-foreground">{correctCount}</span>
+              <span className="text-xs text-muted-foreground">Correct</span>
+            </div>
+          </div>
+          <div className="flex items-center gap-2.5">
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-destructive/20">
+              <XCircle className="h-4 w-4 text-destructive" />
+            </div>
+            <div className="flex flex-col">
+              <span className="text-lg font-bold text-foreground">{wrongCount}</span>
+              <span className="text-xs text-muted-foreground">Wrong</span>
+            </div>
+          </div>
+          <div className="flex items-center gap-2.5">
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-muted-foreground/20">
+              <span className="text-xs font-medium text-muted-foreground">?</span>
+            </div>
+            <div className="flex flex-col">
+              <span className="text-lg font-bold text-foreground">{skipped}</span>
+              <span className="text-xs text-muted-foreground">Skipped</span>
             </div>
           </div>
         </div>
+      </Card>
 
-        {/* Stats Cards */}
-        <div className="mb-8 grid grid-cols-3 gap-3">
-          <Card className="flex flex-col items-center border-none bg-success/15 p-4">
-            <CheckCircle2 className="mb-2 h-6 w-6 text-success" />
-            <span className="text-2xl font-bold text-success">{correctCount}</span>
-            <span className="text-xs text-muted-foreground">Correct</span>
-          </Card>
-          <Card className="flex flex-col items-center border-none bg-destructive/15 p-4">
-            <XCircle className="mb-2 h-6 w-6 text-destructive" />
-            <span className="text-2xl font-bold text-destructive">{wrongCount}</span>
-            <span className="text-xs text-muted-foreground">Wrong</span>
-          </Card>
-          <Card className="flex flex-col items-center border-none bg-muted p-4">
-            <div className="mb-2 flex h-6 w-6 items-center justify-center rounded-full border-2 border-muted-foreground">
-              <span className="text-xs text-muted-foreground">?</span>
-            </div>
-            <span className="text-2xl font-bold text-muted-foreground">{unanswered}</span>
-            <span className="text-xs text-muted-foreground">Skipped</span>
-          </Card>
+      {/* Summary Card */}
+      <Card className="mb-6 border-border bg-card px-5 py-4">
+        <div className="flex items-center justify-between text-sm">
+          <span className="text-muted-foreground">Total Questions</span>
+          <span className="font-semibold text-foreground">{totalQuestions}</span>
         </div>
+        <div className="mt-3 flex items-center justify-between border-t border-border pt-3 text-sm">
+          <span className="text-muted-foreground">Answered</span>
+          <span className="font-semibold text-foreground">
+            {answered} / {totalQuestions}
+          </span>
+        </div>
+      </Card>
 
-        {/* Summary */}
-        <Card className="mb-6 border-none bg-secondary p-4">
-          <div className="flex items-center justify-between text-sm">
-            <span className="text-muted-foreground">Total Questions</span>
-            <span className="font-medium text-foreground">{totalQuestions}</span>
-          </div>
-          <div className="mt-2 flex items-center justify-between text-sm">
-            <span className="text-muted-foreground">Your Score</span>
-            <span className="font-medium text-foreground">
-              {correctCount} / {totalQuestions}
-            </span>
-          </div>
-        </Card>
-
-        {/* Action Buttons */}
-        <div className="flex flex-col gap-3">
-          {onRetry && (
-            <Button
-              variant="secondary"
-              className="w-full"
-              onClick={onRetry}
-            >
-              <RotateCcw className="mr-2 h-4 w-4" />
-              Retry Test
-            </Button>
-          )}
+      {/* Action Buttons */}
+      <div className="mt-auto flex flex-col gap-3">
+        {onRetry && (
           <Button
-            variant="default"
-            className="w-full"
-            onClick={onExit}
+            variant="secondary"
+            className="w-full gap-2"
+            onClick={onRetry}
           >
-            <LogOut className="mr-2 h-4 w-4" />
-            Exit to Sections
+            <RotateCcw className="h-4 w-4" />
+            Retry Test
           </Button>
-        </div>
+        )}
+        <Button
+          variant="default"
+          className="w-full gap-2"
+          onClick={onExit}
+        >
+          <ArrowRight className="h-4 w-4" />
+          Back to Sections
+        </Button>
       </div>
     </div>
   )
