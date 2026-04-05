@@ -1,12 +1,13 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { Progress } from "@/components/ui/progress"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
-import { CheckCircle2, XCircle, ArrowLeft, ArrowRight, LogOut } from "lucide-react"
+import { CheckCircle2, XCircle, ArrowLeft, ArrowRight, LogOut, Flag } from "lucide-react"
 import type { Question } from "@/lib/quiz-types"
 import { cn } from "@/lib/utils"
+import { Scorecard } from "./scorecard"
 
 interface TestScreenProps {
   questions: Question[]
@@ -18,12 +19,26 @@ export function TestScreen({ questions, onExit }: TestScreenProps) {
   const [answers, setAnswers] = useState<Record<number, "A" | "B" | "C" | "D">>({})
   const [correctCount, setCorrectCount] = useState(0)
   const [wrongCount, setWrongCount] = useState(0)
+  const [showScorecard, setShowScorecard] = useState(false)
 
   const currentQuestion = questions[currentIndex]
   const hasAnswered = answers[currentIndex] !== undefined
   const progressValue = ((currentIndex + 1) / questions.length) * 100
 
   const options: ("A" | "B" | "C" | "D")[] = ["A", "B", "C", "D"]
+  const isLastQuestion = currentIndex === questions.length - 1
+
+  function handleFinish() {
+    setShowScorecard(true)
+  }
+
+  function handleRetry() {
+    setCurrentIndex(0)
+    setAnswers({})
+    setCorrectCount(0)
+    setWrongCount(0)
+    setShowScorecard(false)
+  }
 
   function handleSelect(option: "A" | "B" | "C" | "D") {
     if (hasAnswered) return
@@ -53,6 +68,18 @@ export function TestScreen({ questions, onExit }: TestScreenProps) {
       return "bg-destructive text-destructive-foreground"
     }
     return "bg-secondary opacity-50"
+  }
+
+  if (showScorecard) {
+    return (
+      <Scorecard
+        totalQuestions={questions.length}
+        correctCount={correctCount}
+        wrongCount={wrongCount}
+        onExit={onExit}
+        onRetry={handleRetry}
+      />
+    )
   }
 
   return (
@@ -125,15 +152,25 @@ export function TestScreen({ questions, onExit }: TestScreenProps) {
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back
           </Button>
-          <Button
-            variant="secondary"
-            className="flex-1"
-            onClick={() => setCurrentIndex((i) => Math.min(questions.length - 1, i + 1))}
-            disabled={currentIndex === questions.length - 1}
-          >
-            Next
-            <ArrowRight className="ml-2 h-4 w-4" />
-          </Button>
+          {isLastQuestion ? (
+            <Button
+              variant="default"
+              className="flex-1"
+              onClick={handleFinish}
+            >
+              <Flag className="mr-2 h-4 w-4" />
+              Finish
+            </Button>
+          ) : (
+            <Button
+              variant="secondary"
+              className="flex-1"
+              onClick={() => setCurrentIndex((i) => Math.min(questions.length - 1, i + 1))}
+            >
+              Next
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+          )}
         </div>
       </div>
     </div>
