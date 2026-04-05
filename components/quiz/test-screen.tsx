@@ -57,24 +57,35 @@ export function TestScreen({ questions, onExit }: TestScreenProps) {
 
   return (
     <div className="flex min-h-screen flex-col pb-20">
-      {/* Progress Section */}
-      <div className="border-b border-border/50 p-4">
-        <Progress value={progressValue} className="h-1.5" />
-        <div className="mt-3 flex items-center justify-between text-sm">
-          <span className="text-muted-foreground">
-            Question {currentIndex + 1} of {questions.length}
+      {/* Header with Exit Button */}
+      <div className="flex items-center justify-between border-b border-border/50 px-4 py-3">
+        <div className="flex items-center gap-3">
+          <span className="flex items-center gap-1.5 text-sm text-destructive">
+            <XCircle className="h-4 w-4" />
+            {wrongCount}
           </span>
-          <div className="flex items-center gap-4">
-            <span className="flex items-center gap-1.5 text-destructive">
-              <XCircle className="h-4 w-4" />
-              {wrongCount}
-            </span>
-            <span className="flex items-center gap-1.5 text-success">
-              <CheckCircle2 className="h-4 w-4" />
-              {correctCount}
-            </span>
-          </div>
+          <span className="flex items-center gap-1.5 text-sm text-success">
+            <CheckCircle2 className="h-4 w-4" />
+            {correctCount}
+          </span>
         </div>
+        <Button
+          variant="ghost"
+          size="sm"
+          className="h-8 gap-1.5 text-muted-foreground hover:text-destructive"
+          onClick={onExit}
+        >
+          <LogOut className="h-4 w-4" />
+          Exit
+        </Button>
+      </div>
+
+      {/* Progress Section */}
+      <div className="px-4 py-3">
+        <Progress value={progressValue} className="h-1.5" />
+        <p className="mt-2 text-center text-sm text-muted-foreground">
+          Question {currentIndex + 1} of {questions.length}
+        </p>
       </div>
 
       {/* Question */}
@@ -104,15 +115,7 @@ export function TestScreen({ questions, onExit }: TestScreenProps) {
 
       {/* Bottom Navigation */}
       <div className="fixed bottom-0 left-0 right-0 mx-auto max-w-lg border-t border-border/50 bg-background/95 p-3 backdrop-blur-sm">
-        <div className="flex gap-2">
-          <Button
-            variant="secondary"
-            className="flex-1"
-            onClick={onExit}
-          >
-            <LogOut className="mr-2 h-4 w-4" />
-            Exit
-          </Button>
+        <div className="flex gap-3">
           <Button
             variant="secondary"
             className="flex-1"
