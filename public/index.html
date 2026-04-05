@@ -72,16 +72,43 @@
       gap: 8px;
     }
 
-    .logo-image {
-      width: 120px;
-      height: auto;
-      border-radius: 24px;
+    .logo-wordmark {
+      display: flex;
+      align-items: center;
+      gap: 10px;
       animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    .logo-wordmark-text {
+      font-size: 36px;
+      font-weight: 700;
+      letter-spacing: -1px;
+      color: var(--text-primary);
+    }
+
+    .logo-wordmark-text span {
+      color: var(--primary);
+    }
+
+    .logo-wordmark-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: var(--primary-dim);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-wordmark-icon svg {
+      width: 28px;
+      height: 28px;
+      color: var(--primary);
     }
 
     @keyframes pulse {
       0%, 100% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.05); opacity: 0.8; }
+      50% { transform: scale(1.02); opacity: 0.9; }
     }
 
     /* ===== HEADER ===== */
@@ -453,11 +480,26 @@
       margin-bottom: 40px;
     }
 
-    .login-logo {
-      width: 100px;
-      height: auto;
-      border-radius: 24px;
+    .login-logo-wordmark {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
       margin-bottom: 24px;
+    }
+
+    .login-logo-wordmark .logo-wordmark-text {
+      font-size: 28px;
+    }
+
+    .login-logo-wordmark .logo-wordmark-icon {
+      width: 40px;
+      height: 40px;
+    }
+
+    .login-logo-wordmark .logo-wordmark-icon svg {
+      width: 24px;
+      height: 24px;
     }
 
     .login-title {
@@ -552,7 +594,14 @@
 <!-- PAGE LOADER -->
 <div id="pageLoader">
   <div class="logo-box">
-    <img src="/images/testbank-logo.jpeg" alt="Testbank Logo" class="logo-image">
+    <div class="logo-wordmark">
+      <div class="logo-wordmark-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+        </svg>
+      </div>
+      <span class="logo-wordmark-text">Test<span>bank</span></span>
+    </div>
   </div>
 </div>
 
@@ -561,7 +610,14 @@
   <!-- LOGIN SCREEN -->
   <div id="loginScreen" class="screen">
     <div class="login-header">
-      <img src="/images/testbank-logo.jpeg" alt="Testbank" class="login-logo">
+      <div class="login-logo-wordmark">
+        <div class="logo-wordmark-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+          </svg>
+        </div>
+        <span class="logo-wordmark-text">Test<span>bank</span></span>
+      </div>
       <h1 class="login-title">Welcome to Testbank</h1>
       <p class="login-subtitle">Enter your credentials to continue</p>
     </div>
